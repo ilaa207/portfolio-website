@@ -1,846 +1,292 @@
 /*---------------------------------------------
-# Variabili Root
+# Root Variables (per una gestione centralizzata di tema e tipografia)
 ---------------------------------------------*/
-
 :root {
-  /* Font */
   --default-font: "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --heading-font: "Raleway", sans-serif;
-  --nav-font: "Poppins", sans-serif;
 
-  /* Colori globali */
-  --background-color: #ffffff;      /* Colore di sfondo della pagina */
-  --default-color: #444444;         /* Colore testo predefinito */
-  --heading-color: #222222;         /* Colore titoli */
-  --accent-color: #c19fff;          /* Colore accentuato usato per link e bottoni */
-  --surface-color: #ffffff;         /* Colore di sfondo per superfici ed elementi */
-  --contrast-color: #ffffff;        /* Colore per elementi di contrasto (es. su sfondi accentuati) */
+  --background-color: #ffffff;     /* Sfondo principale */
+  --default-color: #444444;        /* Colore primario del testo */
+  --heading-color: #222222;        /* Colore titoli */
+  --accent-color: #c19fff;         /* Colore di evidenziazione */
+  --surface-color: #ffffff;        /* Colore per elementi sopra lo sfondo */
+  --contrast-color: #ffffff;       /* Colore usato su superfici accentate */
 
-  /* Colori menu di navigazione */
-  --nav-color: #444444;                     /* Colore testo navigazione */
-  --nav-hover-color: #c19fff;               /* Colore hover navigazione */
-  --nav-mobile-background-color: #ffffff;   /* Sfondo menu mobile */
-  --nav-dropdown-background-color: #ffffff; /* Sfondo menu a tendina */
-  --nav-dropdown-color: #444444;            /* Colore testo menu a tendina */
-  --nav-dropdown-hover-color: #c19fff;      /* Colore hover menu a tendina */
-
-  /* Comportamento scroll */
-  scroll-behavior: smooth;                  /* Scorrimento fluido per ancore */
+  scroll-behavior: smooth;         /* Scroll fluido per UX migliorata */
 }
 
-/*---------------------------------------------
-# Classi utility per schema colori
----------------------------------------------*/
-
+/* Temi alternativi: override di variabili per dark/light mode */
 .light-background {
-  --background-color: #f5f5f5;      /* Sovrascrive con sfondo chiaro */
-  --surface-color: #ffffff;         /* Sovrascrive con superficie chiara */
+  --background-color: #f5f5f5;
+  --surface-color: #ffffff;
 }
 
 .dark-background {
-  --background-color: #060606;      /* Sovrascrive con sfondo scuro */
-  --default-color: #ffffff;         /* Testo chiaro su sfondo scuro */
-  --heading-color: #ffffff;         /* Titoli chiari su sfondo scuro */
-  --surface-color: #252525;         /* Superficie più scura */
-  --contrast-color: #ffffff;        /* Mantiene il contrasto */
+  --background-color: #060606;
+  --default-color: #ffffff;
+  --heading-color: #ffffff;
+  --surface-color: #252525;
+  --contrast-color: #ffffff;
 }
 
-/*---------------------------------------------
-# Tipografia e link
----------------------------------------------*/
 
+/*---------------------------------------------
+# Base Typography e link
+---------------------------------------------*/
 body {
-  color: var(--default-color);                    /* Colore base del testo */
-  background-color: var(--background-color);      /* Colore base dello sfondo */
-  font-family: var(--default-font);               /* Font predefinito */
+  color: var(--default-color);
+  background-color: var(--background-color);
+  font-family: var(--default-font);
 }
 
 a {
-  color: var(--accent-color);                     /* Colore dei link */
-  text-decoration: none;                          /* Nessuna sottolineatura */
-  transition: 0.3s;                                /* Transizione morbida al passaggio mouse */
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: 0.3s; /* Migliora accessibilità visiva al focus/hover */
+   display: inline-block;
 }
 
 a:hover {
-  color: color-mix(in srgb, var(--accent-color), transparent 25%);  /* Colore leggermente più chiaro al passaggio mouse */
-  text-decoration: none;                                            /* Nessuna sottolineatura al passaggio mouse */
+  color: color-mix(in srgb, var(--accent-color), transparent 25%);
+  text-decoration: none;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--heading-color);                    /* Colore titoli */
-  font-family: var(--heading-font);              /* Font titoli */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+  font-family: var(--heading-font);
 }
 
 
+/*---------------------------------------------
+# Header (struttura principale in cima alla pagina)
+---------------------------------------------*/
 .header {
-  color: var(--default-color);               /* Colore testo base (variabile CSS) */
-  background-color: var(--background-color); /* Colore sfondo base (variabile CSS) */
-  padding: 15px 0;                           /* Spaziatura verticale sopra e sotto */
-  transition: all 0.5s;                      /* Transizione fluida di tutte le proprietà in 0.5s */
-  z-index: 997;                             /* Posizionamento sopra altri elementi con z-index inferiore */
-  box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1); /* Ombra delicata attorno all'header per effetto profondità */
-}
-
-/* MEDIA QUERY: per schermi fino a 1200px di larghezza (tablet e simili) */
-@media (max-width: 1200px) {
-  .header .navmenu {
-    order: 3;                            /* Menu di navigazione terzo */
-  }
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 15px 0;
+  transition: all 0.5s;
+  z-index: 997; /* Posizionato sopra altri elementi non sticky */
+  box-shadow: 0px 0 18px rgba(0, 0, 0, 0.1);
 }
 
 
-/*--------------------------------------------------------------
-# Navigation Menu - Menu di navigazione
---------------------------------------------------------------*/
-
-/* Desktop Navigation - stile per schermi grandi (min-width: 1200px) */
-@media (min-width: 1200px) {
-  .navmenu {
-    padding: 0; /* Rimuove padding interno del container navmenu */
-  }
-
-  .navmenu ul {
-    margin: 0;               /* Rimuove margine esterno */
-    padding: 0;              /* Rimuove padding interno */
-    display: flex;           /* Usa flexbox per disporre gli elementi in orizzontale */
-    list-style: none;        /* Rimuove i bullet points della lista */
-    align-items: center;     /* Allinea verticalmente al centro gli elementi */
-  }
-
-  .navmenu li {
-    position: relative;      /* Posizione relativa per permettere dropdown assoluti */
-  }
-
-  .navmenu>ul>li {
-    white-space: nowrap;     /* Impedisce la rottura della linea */
-    padding: 15px 14px;      /* Spaziatura interna verticale e orizzontale */
-  }
-
-  .navmenu>ul>li:last-child {
-    padding-right: 0;        /* Rimuove padding a destra nell’ultimo elemento */
-  }
-
-  /* Link menu e focus */
-  .navmenu a,
-  .navmenu a:focus {
-    color: var(--nav-color);             /* Colore testo link normale */
-    font-size: 15px;                     /* Dimensione font */
-    padding: 0 2px;                     /* Padding orizzontale minimo */
-    font-family: var(--nav-font);       /* Font famiglia personalizzata */
-    font-weight: 400;                   /* Peso font normale */
-    display: flex;                      /* Flexbox per centrare icone e testo */
-    align-items: center;                /* Allinea verticalmente al centro */
-    justify-content: space-between;    /* Spazio tra testo e icona */
-    white-space: nowrap;                /* No a rottura testo */
-    transition: 0.3s;                   /* Transizione fluida per hover/focus */
-    position: relative;                 /* Posizione relativa per pseudo-elementi */
-  }
-
-  /* Icona dentro link (es. freccia dropdown) */
-  .navmenu a i,
-  .navmenu a:focus i {
-    font-size: 12px;                   /* Dimensione icona */
-    line-height: 0;                   /* Altezza linea azzerata per allineamento */
-    margin-left: 5px;                 /* Spazio a sinistra tra testo e icona */
-    transition: 0.3s;                 /* Transizione per effetti hover/focus */
-  }
-
-  /* Linea sottolineatura animata (pseudo-elemento before) */
-  .navmenu>ul>li>a:before {
-    content: "";                     /* Elemento vuoto usato come decorazione */
-    position: absolute;              /* Posizionato relativamente al link */
-    height: 2px;                    /* Altezza linea sottile */
-    bottom: -6px;                   /* Posizionato sotto il testo */
-    left: 0;                       /* Inizia da sinistra */
-    background-color: var(--nav-hover-color); /* Colore linea al passaggio */
-    visibility: hidden;             /* Inizialmente nascosta */
-    width: 0px;                    /* Larghezza iniziale nulla */
-    transition: all 0.3s ease-in-out 0s; /* Transizione animata */
-  }
-
-  /* Mostra la linea sottolineatura quando si passa sopra o è attivo */
-  .navmenu a:hover:before,
-  .navmenu li:hover>a:before,
-  .navmenu .active:before {
-    visibility: visible;            /* Rende visibile la linea */
-    width: 25px;                   /* Larghezza linea estesa */
-  }
-
-  /* Cambia colore del link al passaggio mouse o se attivo */
-  .navmenu li:hover>a,
-  .navmenu .active,
-  .navmenu .active:focus {
-    color: var(--nav-hover-color); /* Colore evidenziato */
-  }
-
-  /* Dropdown menu - contenitore sottomenu */
-  .navmenu .dropdown ul {
-    margin: 0;                       /* Rimuove margini */
-    padding: 10px 0;                 /* Padding verticale */
-    background: var(--nav-dropdown-background-color); /* Sfondo del dropdown */
-    display: block;                  /* Impostato come blocco */
-    position: absolute;              /* Posizionato assoluto */
-    visibility: hidden;              /* Inizialmente nascosto */
-    left: 14px;                     /* Spostamento orizzontale dal genitore */
-    top: 130%;                      /* Spostamento verticale sotto voce menu */
-    opacity: 0;                     /* Trasparente */
-    transition: 0.3s;               /* Transizione per apparizione */
-    border-radius: 4px;             /* Angoli arrotondati */
-    z-index: 99;                    /* Sopra altri elementi */
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1); /* Ombra per profondità */
-  }
-
-  /* Elementi dentro dropdown */
-  .navmenu .dropdown ul li {
-    min-width: 200px;              /* Larghezza minima degli elementi del dropdown */
-  }
-
-  .navmenu .dropdown ul a {
-    padding: 10px 20px;            /* Spaziatura interna */
-    font-size: 15px;               /* Dimensione font */
-    text-transform: none;          /* Nessuna trasformazione del testo */
-    color: var(--nav-dropdown-color); /* Colore testo dropdown */
-  }
-
-  .navmenu .dropdown ul a i {
-    font-size: 12px;               /* Dimensione icona nel dropdown */
-  }
-
-  /* Hover sugli elementi dropdown */
-  .navmenu .dropdown ul a:hover,
-  .navmenu .dropdown ul .active:hover,
-  .navmenu .dropdown ul li:hover>a {
-    color: var(--nav-dropdown-hover-color); /* Colore evidenziato */
-  }
-
-  /* Mostra dropdown al passaggio del mouse */
-  .navmenu .dropdown:hover>ul {
-    opacity: 1;                    /* Rende visibile */
-    top: 100%;                    /* Posizionamento corretto */
-    visibility: visible;           /* Visibile */
-  }
-
-  /* Dropdown di secondo livello */
-  .navmenu .dropdown .dropdown ul {
-    top: 0;                      /* Allineato in alto */
-    left: -90%;                  /* Posizionato a sinistra rispetto al genitore */
-    visibility: hidden;          /* Inizialmente nascosto */
-  }
-
-  /* Mostra dropdown di secondo livello al passaggio */
-  .navmenu .dropdown .dropdown:hover>ul {
-    opacity: 1;                  /* Visibile */
-    top: 0;                     /* Allineato in alto */
-    left: -100%;                /* Posizione corretta a sinistra */
-    visibility: visible;        /* Visibile */
-  }
+/*---------------------------------------------
+# Menu di Navigazione
+---------------------------------------------*/
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* mette i figli (li) su una riga orizzontale */
+  gap: 20px;
+  font-family: var(--heading-font);
 }
 
-/* Mobile Navigation - stile per schermi piccoli (max-width: 1199px) */
-@media (max-width: 1199px) {
-  .mobile-nav-toggle {
-    color: var(--nav-color);         /* Colore icona toggle menu */
-    font-size: 28px;                 /* Dimensione icona */
-    line-height: 0;                 /* Altezza linea azzerata */
-    margin-right: 10px;             /* Margine a destra */
-    cursor: pointer;                /* Cambia cursore in pointer per cliccabile */
-    transition: color 0.3s;         /* Transizione colore */
-  }
-
-  .navmenu {
-    padding: 0;                     /* Rimuove padding */
-    z-index: 9997;                  /* Posizionato molto in alto */
-  }
-
-  .navmenu ul {
-    display: none;                  /* Nasconde la lista di default */
-    list-style: none;              /* Rimuove bullet points */
-    position: absolute;             /* Posizionato assoluto */
-    inset: 60px 20px 20px 20px;    /* Posizione top/destra/bottom/sinistra */
-    padding: 10px 0;                /* Padding verticale */
-    margin: 0;                     /* Rimuove margine */
-    border-radius: 6px;             /* Angoli arrotondati */
-    background-color: var(--nav-mobile-background-color); /* Sfondo menu mobile */
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%); /* Bordo molto chiaro */
-    box-shadow: none;              /* Nessuna ombra */
-    overflow-y: auto;              /* Scroll verticale se contenuto lungo */
-    transition: 0.3s;              /* Transizione */
-    z-index: 9998;                /* Sopra altri elementi */
-  }
-
-  /* Link menu mobile */
-  .navmenu a,
-  .navmenu a:focus {
-    color: var(--nav-dropdown-color); /* Colore testo link */
-    padding: 10px 20px;             /* Spaziatura interna */
-    font-family: var(--nav-font);   /* Font personalizzato */
-    font-size: 17px;               /* Font più grande per touch */
-    font-weight: 500;              /* Peso medio */
-    display: flex;                 /* Flexbox per allineamento */
-    align-items: center;           /* Verticale al centro */
-    justify-content: space-between; /* Spazio tra testo e icona */
-    white-space: nowrap;           /* No a rottura testo */
-    transition: 0.3s;              /* Transizione fluida */
-  }
-
-  /* Icone dentro link menu mobile */
-  .navmenu a i,
-  .navmenu a:focus i {
-    font-size: 12px;              /* Dimensione icona */
-    line-height: 0;              /* Altezza linea azzerata */
-    margin-left: 5px;            /* Spazio a sinistra */
-    width: 30px;                 /* Larghezza icona */
-    height: 30px;                /* Altezza icona */
-    display: flex;               /* Flexbox per centrare icona */
-    align-items: center;         /* Centrare verticalmente */
-    justify-content: center;     /* Centrare orizzontalmente */
-    border-radius: 50%;          /* Icona rotonda */
-    transition: 0.3s;            /* Transizione fluida */
-    background-color: color-mix(in srgb, var(--accent-color), transparent 90%); /* Sfondo trasparente colorato */
-  }
-
-  /* Hover su icona */
-  .navmenu a i:hover,
-  .navmenu a:focus i:hover {
-    background-color: var(--accent-color); /* Sfondo colorato pieno */
-    color: var(--contrast-color);          /* Colore icona contrastante */
-  }
-
-  /* Hover e stato attivo link */
-  .navmenu a:hover,
-  .navmenu .active,
-  .navmenu .active:focus {
-    color: var(--nav-dropdown-hover-color); /* Colore evidenziato */
-  }
-
-  /* Icona ruotata se attivo (dropdown aperto) */
-  .navmenu .active i,
-  .navmenu .active:focus i {
-    background-color: var(--accent-color); /* Sfondo colorato */
-    color: var(--contrast-color);           /* Colore contrastante */
-    transform: rotate(180deg);               /* Rotazione icona (es. freccia) */
-  }
-
-  /* Dropdown sottomenu mobile */
-  .navmenu .dropdown ul {
-    position: static;            /* Posizione statica (scorre nel flusso) */
-    display: none;               /* Nasconde di default */
-    z-index: 99;                 /* Posizione sopra */
-    padding: 10px 0;             /* Padding verticale */
-    margin: 10px 20px;           /* Margini */
-    background-color: var(--nav-dropdown-background-color); /* Sfondo dropdown */
-    transition: all 0.5s ease-in-out; /* Transizione fluida */
-  }
-
-  /* Dropdown annidati */
-  .navmenu .dropdown ul ul {
-    background-color: rgba(33, 37, 41, 0.1); /* Sfondo semitrasparente */
-  }
-
-  /* Mostra dropdown attivo */
-  .navmenu .dropdown>.dropdown-active {
-    display: block;                    /* Mostra il menu */
-    background-color: rgba(33, 37, 41, 0.03); /* Sfondo leggermente evidenziato */
-  }
-
-  /* Quando menu mobile è attivo (aperto) */
-  .mobile-nav-active {
-    overflow: hidden; /* Impedisce scroll del body */
-  }
-
-  /* Stile toggle menu mobile quando attivo */
-  .mobile-nav-active .mobile-nav-toggle {
-    color: #fff;                  /* Colore bianco */
-    position: absolute;           /* Posizione assoluta */
-    font-size: 32px;              /* Dimensione più grande */
-    top: 15px;                   /* Distanza dall’alto */
-    right: 15px;                 /* Distanza da destra */
-    margin-right: 0;             /* Nessun margine */
-    z-index: 9999;               /* Sopra tutti */
-  }
-
-  /* Contenitore navmenu quando menu mobile attivo */
-  .mobile-nav-active .navmenu {
-    position: fixed;             /* Posizione fissa sullo schermo */
-    overflow: hidden;            /* Nasconde overflow */
-    inset: 0;                   /* Occupa tutto lo schermo */
-    background: rgba(33, 37, 41, 0.8); /* Sfondo semitrasparente scuro */
-    transition: 0.3s;           /* Transizione */
-  }
-
-  /* Mostra lista ul nel menu mobile attivo */
-  .mobile-nav-active .navmenu>ul {
-    display: block;              /* Visualizza la lista */
-  }
+.menu ul li a {
+  color: #444444;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
-/*--------------------------------------------------------------
-# Preloader
---------------------------------------------------------------*/
-#preloader {
-  position: fixed; /* Fissa il preloader su tutta la finestra, rimane visibile durante lo scroll */
-  inset: 0; /* comprende -> top: 0; right: 0; bottom: 0; left: 0; copre tutto lo schermo */
-  z-index: 9999; /* Si posiziona sopra tutti gli altri elementi */
-  overflow: hidden; /* Nasconde eventuali contenuti che escono dai bordi */
-  background-color: var(--background-color); /* Sfondo del preloader, variabile CSS */
-  transition: all 0.6s ease-out; /* Transizione morbida per cambiamenti di stato */
-  width: 100%; /* Occupa tutta la larghezza della finestra */
-  height: 100vh; /* Occupa tutta l'altezza visibile della finestra */
+.menu ul li a:hover {
+  color: #c19fff;
+  cursor: pointer;
 }
 
-/* Pseudo-elementi per gli anelli animati del preloader */
-#preloader:before,
-#preloader:after {
-  content: ""; /* Elementi vuoti ma necessari per il disegno */
-  position: absolute; /* Posizionamento assoluto rispetto al preloader */
-  border: 4px solid var(--accent-color); /* Bordo colorato con variabile accent */
-  border-radius: 50%; /* Forma circolare */
-  animation: animate-preloader 2s cubic-bezier(0, 0.2, 0.8, 1) infinite; /* Animazione continua con easing personalizzato */
-}
 
-#preloader:after {
-  animation-delay: -0.5s; /* Ritardo di mezzo secondo per creare effetto alternato con :before */
-}
-
-/* Animazione keyframes per far espandere e dissolvere i cerchi */
-@keyframes animate-preloader {
-  0% {
-    width: 10px; /* Inizia piccolo */
-    height: 10px;
-    top: calc(50% - 5px); /* Centra verticalmente considerando metà dimensione */
-    left: calc(50% - 5px); /* Centra orizzontalmente considerando metà dimensione */
-    opacity: 1; /* Completamente visibile */
-  }
-
-  100% {
-    width: 72px; /* Si espande a dimensione maggiore */
-    height: 72px;
-    top: calc(50% - 36px); /* Centro aggiorna posizione per il nuovo diametro */
-    left: calc(50% - 36px);
-    opacity: 0; /* Si dissolve fino a invisibile */
-  }
-}
-
-/*--------------------------------------------------------------
-# Scroll Top Button
---------------------------------------------------------------*/
-.scroll-top {
-  position: fixed; /* Posiziona il pulsante sempre visibile in una posizione fissa nella finestra */
-  visibility: hidden; /* Di default il pulsante è nascosto */
-  opacity: 0; /* Trasparente all’inizio */
-  right: 15px; /* Distanza da destra */
-  bottom: -15px; /* Posizionato leggermente fuori dal viewport in basso (fuori schermo) */
-  z-index: 99999; /* Sempre sopra tutti gli elementi */
-  background-color: var(--accent-color); /* Colore di sfondo basato sulla variabile accent */
-  width: 44px; /* Larghezza del pulsante */
-  height: 44px; /* Altezza del pulsante */
-  border-radius: 50px; /* Forma rotonda */
-  transition: all 0.4s; /* Transizione fluida per tutti i cambiamenti */
-}
-
-.scroll-top i {
-  font-size: 24px; /* Dimensione dell’icona interna */
-  color: var(--contrast-color); /* Colore del testo/icone, contrastante */
-  line-height: 0; /* Altezza linea azzerata per centraggio verticale */
-}
-
-.scroll-top:hover {
-  background-color: color-mix(in srgb, var(--accent-color), transparent 20%); /* Sfondo più chiaro al passaggio del mouse */
-  color: var(--contrast-color); /* Mantiene colore contrastante all’hover */
-}
-
-.scroll-top.active {
-  visibility: visible; /* Quando attivo, il pulsante diventa visibile */
-  opacity: 1; /* Completa opacità */
-  bottom: 15px; /* Viene spostato in posizione visibile, sopra il bordo */
-}
-
-/*--------------------------------------------------------------
-# Disable aos animation delay on mobile devices
---------------------------------------------------------------*/
-@media screen and (max-width: 768px) {
-  [data-aos-delay] {
-    transition-delay: 0 !important; /* Disabilita il ritardo nelle animazioni AOS su dispositivi mobili per evitare problemi di performance o UX */
-  }
-}
-
-/*--------------------------------------------------------------
-# Global Page Titles & Breadcrumbs
---------------------------------------------------------------*/
+/*---------------------------------------------
+# Titolo pagina e Breadcrumbs
+---------------------------------------------*/
 .page-title {
-  color: var(--default-color); /* Colore del testo basato sulla variabile di default */
-  background-color: var(--background-color); /* Sfondo basato sulla variabile di sfondo */
-  padding: 25px 0; /* Spaziatura verticale sopra e sotto */
-  position: relative; /* Posizionamento relativo per contenuti assoluti interni se presenti */
-  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 85%); /* Linea sottile chiara come separatore in basso */
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 25px 0;
+  position: relative;
+  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
 }
 
 .page-title h1 {
-  font-size: 24px; /* Dimensione del titolo principale */
-  font-weight: 400; /* Peso del font medio */
+  font-weight: 400;
 }
 
 .page-title .breadcrumbs ol {
-  display: flex; /* Layout orizzontale flessibile */
-  flex-wrap: wrap; /* Permette il ritorno a capo se necessario */
-  list-style: none; /* Rimuove i bullet points dalla lista */
-  padding: 0; /* Rimuove padding interno */
-  margin: 0; /* Rimuove margine esterno */
-  font-size: 14px; /* Dimensione del testo dei breadcrumbs */
-  font-weight: 400; /* Peso del font medio */
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .page-title .breadcrumbs ol li+li {
-  padding-left: 10px; /* Spazio a sinistra tra gli elementi breadcrumbs */
+  padding-left: 10px;
 }
 
 .page-title .breadcrumbs ol li+li::before {
-  content: "/"; /* Aggiunge una barra come separatore tra i breadcrumb */
-  display: inline-block; /* Permette di aggiungere padding */
-  padding-right: 10px; /* Spazio a destra della barra */
-  color: color-mix(in srgb, var(--default-color), transparent 70%); /* Colore della barra semi-trasparente */
+  content: "/";
+  display: inline-block;
+  padding-right: 10px;
+  color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
-/*--------------------------------------------------------------
-# Global Sections
---------------------------------------------------------------*/
+
+/*---------------------------------------------
+# Sezioni Generali
+---------------------------------------------*/
 section,
 .section {
-  color: var(--default-color); /* Colore testo standard nelle sezioni */
-  background-color: var(--background-color); /* Sfondo standard delle sezioni */
-  padding: 60px 0; /* Spaziatura verticale generosa sopra e sotto */
-  scroll-margin-top: 100px; /* Margine per scroll automatico (es. con ancore) */
-  overflow: clip; /* Nasconde contenuti che escono dal box senza scroll */
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 60px 0;
+  scroll-margin-top: 100px; /* Spazio sopra l'ancora quando scrollata */
+  overflow: clip; /* Evita scroll non desiderato su elementi assoluti */
 }
 
-@media (max-width: 1199px) {
-  section,
-  .section {
-    scroll-margin-top: 66px; /* Margine scroll ridotto per viewport più piccoli */
-  }
-}
 
-/*--------------------------------------------------------------
-# Global Section Titles
---------------------------------------------------------------*/
+/*---------------------------------------------
+# Titoli delle sezioni
+---------------------------------------------*/
 .section-title {
-  text-align: center; /* Centra orizzontalmente il testo */
-  padding-bottom: 60px; /* Spazio sotto il titolo per distanziare dagli elementi successivi */
-  position: relative; /* Per posizionare elementi figli in modo assoluto */
+  text-align: center;
+  padding-bottom: 60px;
+  position: relative;
 }
 
 .section-title h2 {
-  font-size: 32px; /* Dimensione grande per i titoli di sezione */
-  font-weight: 700; /* Grassetto per evidenziare */
-  margin-bottom: 20px; /* Spazio sotto il titolo */
-  padding-bottom: 20px; /* Spazio interno sotto il testo per decorazione */
-  position: relative; /* Per posizionare pseudo-elementi */
+  font-weight: 700;
+  padding-bottom: 20px;
+  position: relative;
 }
 
 .section-title h2:after {
-  content: ""; /* Contenuto vuoto per pseudo-elemento decorativo */
-  position: absolute; /* Posizione assoluta rispetto a h2 */
-  display: block; /* Blocca il contenuto per poter avere larghezza/altezza */
-  width: 50px; /* Larghezza della linea decorativa */
-  height: 3px; /* Altezza della linea */
-  background: var(--accent-color); /* Colore della linea decorativa */
-  left: 0; /* Posiziona a sinistra */
-  right: 0; /* Posiziona a destra */
-  bottom: 0; /* Posiziona in basso rispetto a h2 */
-  margin: auto; /* Centra orizzontalmente la linea */
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--accent-color);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 
-.section-title p {
-  margin-bottom: 0; /* Rimuove margine inferiore dal paragrafo */
-}
 
-/*--------------------------------------------------------------
-# Hero Section
---------------------------------------------------------------*/
+/*---------------------------------------------
+# Hero Section (intestazione principale pagina)
+---------------------------------------------*/
 .hero {
-  width: 100%; /* Occupa tutta la larghezza disponibile */
-  min-height: calc(100vh - 82px); /* Altezza minima pari all’altezza viewport meno 82px (es. header) */
-  position: relative; /* Per gestire elementi assoluti interni */
-  padding: 80px 0; /* Spaziatura verticale interna sopra e sotto */
-  display: flex; /* Usa Flexbox per layout */
-  align-items: center; /* Centra verticalmente i contenuti */
-  justify-content: center; /* Centra orizzontalmente i contenuti */
-}
-
-@media (max-width: 1200px) {
-  .hero {
-    min-height: calc(100vh - 68px); /* Altezza minima leggermente ridotta su schermi più piccoli */
-  }
+  width: 100%;
+  min-height: calc(100vh - 55px); /*L’altezza minima copre tutto lo schermo, tranne 82px.*/
+  position: relative;
+  padding: 80px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero img {
-  position: absolute; /* Posiziona l’immagine in modo assoluto dentro l’hero */
-  inset: 0; /* Equivalente a top:0; right:0; bottom:0; left:0; */
-  display: block; /* Rimuove margini di default dell’immagine */
-  width: 100%; /* Larghezza piena del contenitore */
-  height: 100%; /* Altezza piena del contenitore */
-  object-fit: cover; /* L’immagine copre tutto senza deformarsi */
-  z-index: 1; /* Posiziona dietro il contenuto principale */
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1; /* Dietro al contenuto */
 }
 
 .hero .container {
-  position: relative; /* Per avere un contesto di posizionamento */
-  z-index: 3; /* Sopra l’immagine di sfondo */
+  position: relative;
+  z-index: 3; /* Sopra immagine */
 }
 
 .hero h2 {
-  margin: 0; /* Rimuove margini di default */
-  font-size: 48px; /* Titolo molto grande per attirare attenzione */
-  font-weight: 700; /* Grassetto per risalto */
-}
-
-.hero p {
-  margin: 10px 0 0 0; /* Spazio sopra e margine inferiori a 0 */
-  font-size: 24px; /* Testo descrittivo grande */
-  color: var(--heading-color); /* Colore principale per titoli e testi importanti */
+  font-weight: 700;
 }
 
 .hero .btn-get-started {
-  color: var(--contrast-color); /* Colore testo contrastante per leggibilità */
-  background: var(--accent-color); /* Sfondo colorato accento */
-  font-family: var(--heading-font); /* Font principale per titoli */
-  text-transform: uppercase; /* Maiuscole tutte le lettere */
-  font-weight: 600; /* Semi-grassetto */
-  font-size: 12px; /* Dimensione testo bottone */
-  letter-spacing: 1px; /* Spaziatura tra le lettere */
-  display: inline-block; /* Blocca dimensioni e permette padding */
-  padding: 12px 40px; /* Spaziatura interna del bottone */
-  border-radius: 50px; /* Bottone con angoli arrotondati a pillola */
-  transition: 0.5s; /* Transizione morbida per effetti hover */
-  margin-top: 30px; /* Spazio sopra al bottone */
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  font-family: var(--heading-font);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 40px;
+  border-radius: 50px;
+  transition: 0.5s;
+  margin-top: 30px;
 }
 
 .hero .btn-get-started:hover {
-  background: color-mix(in srgb, var(--accent-color) 90%, white 20%); /* Colore sfondo chiaro al passaggio del mouse */
+  background: color-mix(in srgb, var(--accent-color) 90%, white 20%);
 }
 
-@media (max-width: 768px) {
-  .hero h2 {
-    font-size: 32px; /* Titolo più piccolo su schermi piccoli */
-  }
 
-  .hero p {
-    font-size: 18px; /* Testo descrittivo più piccolo su mobile */
-  }
-}
-
-/*--------------------------------------------------------------
-# About Section
---------------------------------------------------------------*/
-.about .content h2 {
-  font-weight: 700;           /* Titolo in grassetto per evidenziare */
-  font-size: 24px;            /* Dimensione testo titolo */
-}
-
-.about .content ul {
-  list-style: none;           /* Rimuove i pallini dalla lista */
-  padding: 0;                 /* Rimuove padding interno predefinito */
-}
-
-.about .content ul li {
-  margin-bottom: 20px;        /* Spazio sotto ogni elemento lista */
-  display: flex;              /* Usa flexbox per allineare icona e testo */
-  align-items: center;        /* Allinea verticalmente icona e testo */
-}
-
-.about .content ul strong {
-  margin-right: 10px;         /* Spazio tra testo in grassetto e il successivo */
-}
-
-.about .content ul i {
-  font-size: 16px;            /* Dimensione icona */
-  margin-right: 5px;          /* Spazio tra icona e testo */
-  color: var(--accent-color); /* Colore accentuato per l'icona */
-  line-height: 0;             /* Riduce l'altezza della linea per allineamento */
-}
-
-/*--------------------------------------------------------------
-# Skills Section
---------------------------------------------------------------*/
-.skills-row {
-  display: flex;              /* Dispone gli skill in riga */
-  flex-wrap: wrap;            /* Consente il wrapping su più righe */
-  justify-content: center;    /* Centra le righe all’interno del contenitore */
-  gap: 1.5rem;                /* Spaziatura orizzontale e verticale tra gli skill */
-}
-
-.skill-item {
-  display: flex;              /* Usa flexbox */
-  flex-direction: column;     /* Posiziona icona sopra e testo sotto */
-  align-items: center;        /* Centra orizzontalmente */
-  width: 100px;               /* Larghezza fissa per uniformità */
-  text-align: center;         /* Centra testo all’interno */
-}
-
-/*--------------------------------------------------------------
-# Portfolio Section
---------------------------------------------------------------*/
-.portfolio .portfolio-filters {
-  padding: 0;                 /* Rimuove padding */
-  margin: 0 auto 20px auto;   /* Centra e spazio sotto */
-  list-style: none;           /* Rimuove pallini lista */
-  text-align: center;         /* Centra il testo (i filtri) */
-}
-
-.portfolio .portfolio-filters li {
-  cursor: pointer;            /* Cambia cursore per indicare cliccabilità */
-  display: inline-block;      /* Consente margini e padding */
-  padding: 8px 20px 10px 20px;/* Spaziatura interna */
-  margin: 0;                  /* Rimuove margini predefiniti */
-  font-size: 15px;            /* Dimensione testo */
-  font-weight: 500;           /* Peso medio del font */
-  line-height: 1;             /* Altezza linea compatta */
-  margin-bottom: 5px;         /* Spazio sotto ogni filtro */
-  border-radius: 50px;        /* Bordi arrotondati a pillola */
-  transition: all 0.3s ease-in-out; /* Transizione morbida */
-  font-family: var(--heading-font); /* Font specifico per titoli */
-}
-
-.portfolio .portfolio-filters li:hover,
-.portfolio .portfolio-filters li.filter-active {
-  color: var(--contrast-color);      /* Testo contrastante */
-  background-color: var(--accent-color); /* Sfondo colorato accent */
-}
-
-.portfolio .portfolio-filters li:first-child {
-  margin-left: 0;             /* Rimuove margine sinistro dal primo */
-}
-
-.portfolio .portfolio-filters li:last-child {
-  margin-right: 0;            /* Rimuove margine destro dall’ultimo */
-}
-
-@media (max-width: 575px) {
-  .portfolio .portfolio-filters li {
-    font-size: 14px;          /* Dimensione leggermente ridotta su mobile */
-    margin: 0 0 10px 0;       /* Spazio tra filtri verticalmente */
-  }
-}
-
+/*---------------------------------------------
+# Portfolio
+---------------------------------------------*/
 .portfolio .portfolio-item {
-  position: relative;         /* Necessario per info assoluti */
-  overflow: hidden;           /* Nasconde ciò che esce dal contenitore */
+  position: relative;
+  overflow: hidden;
 }
 
 .portfolio .portfolio-item .portfolio-info {
-  opacity: 0;                /* Inizialmente invisibile */
-  position: absolute;        /* Posizione assoluta dentro l’item */
-  left: 12px;                /* Distanza da sinistra */
-  right: 12px;               /* Distanza da destra */
-  bottom: -100%;             /* Sposta fuori dalla vista inizialmente */
-  z-index: 3;                /* Sopra altri elementi */
-  transition: all ease-in-out 0.5s; /* Transizione fluida */
-  background: color-mix(in srgb, var(--surface-color), transparent 10%); /* Sfondo trasparente colorato */
-  padding: 15px;             /* Spazio interno */
+  opacity: 0;
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: -100%; /* Nasconde inizialmente l'overlay */
+  z-index: 3;
+  transition: all ease-in-out 0.5s;
+  background: color-mix(in srgb, var(--surface-color), transparent 10%);
+  padding: 15px;
 }
 
 .portfolio .portfolio-item .portfolio-info h4 {
-  font-size: 18px;           /* Dimensione titolo */
-  font-weight: 600;          /* Semi-grassetto */
-  padding-right: 50px;       /* Spazio per icone a destra */
+  font-weight: 600;
+  padding-right: 50px;
 }
 
 .portfolio .portfolio-item .portfolio-info p {
-  color: color-mix(in srgb, var(--default-color), transparent 30%); /* Testo semi-trasparente */
-  font-size: 14px;           /* Dimensione testo descrizione */
-  margin-bottom: 0;          /* Rimuove margine inferiore */
-  padding-right: 50px;       /* Spazio per icone a destra */
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  font-size: 14px;
+  margin-bottom: 0;
+  padding-right: 50px;
 }
 
-.portfolio .portfolio-item .portfolio-info .preview-link,
 .portfolio .portfolio-item .portfolio-info .details-link {
-  position: absolute;        /* Posizione icone assoluta */
-  right: 50px;               /* Distanza da destra */
-  font-size: 24px;           /* Dimensione icone */
-  top: calc(50% - 14px);    /* Centratura verticale */
-  color: color-mix(in srgb, var(--default-color), transparent 30%); /* Colore semi-trasparente */
-  transition: 0.3s;          /* Transizione per hover */
-  line-height: 0;            /* Rimuove spazio verticale */
+  position: absolute;
+  right: 14px;
+  top: calc(50% - 14px);
+  font-size: 28px;
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  transition: 0.3s;
+  line-height: 0;
 }
 
-.portfolio .portfolio-item .portfolio-info .preview-link:hover,
 .portfolio .portfolio-item .portfolio-info .details-link:hover {
-  color: var(--accent-color); /* Colore accentuato al passaggio mouse */
-}
-
-.portfolio .portfolio-item .portfolio-info .details-link {
-  right: 14px;               /* Spazio differente da destra */
-  font-size: 28px;           /* Icona più grande */
+  color: var(--accent-color);
 }
 
 .portfolio .portfolio-item:hover .portfolio-info {
-  opacity: 1;                /* Rende visibile */
-  bottom: 0;                 /* Porta in posizione visibile */
+  opacity: 1;
+  bottom: 0; /* Fa comparire l'overlay informativo */
 }
 
-/*--------------------------------------------------------------
-# Portfolio Details Section
---------------------------------------------------------------*/
-.portfolio-details .portfolio-details-slider img {
-  width: 100%;               /* Immagine occupa tutta la larghezza */
+
+/*---------------------------------------------
+# Pulsante "Torna indietro"
+---------------------------------------------*/
+.go-back {
+  text-align: left;
+  width: 100%;
+  margin-bottom: 0.5rem;
 }
 
-.portfolio-details .portfolio-details-slider .swiper-pagination {
-  margin-top: 20px;          /* Spazio sopra paginazione */
-  position: relative;        /* Posizione relativa */
-}
-
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet {
-  width: 12px;               /* Dimensione pallini paginazione */
-  height: 12px;
-  background-color: color-mix(in srgb, var(--default-color), transparent 85%); /* Colore pallini chiaro */
-  opacity: 1;                /* Pallini visibili */
-}
-
-.portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: var(--accent-color); /* Pallino attivo colorato */
-}
-
-.portfolio-details .portfolio-info {
-  background-color: var(--surface-color); /* Sfondo della sezione info */
-  padding: 30px;             /* Spaziatura interna */
-  box-shadow: 0px 0 30px rgba(0, 0, 0, 0.1); /* Ombra soffusa */
-}
-
-.portfolio-details .portfolio-info h3 {
-  font-size: 22px;           /* Titolo h3 */
-  font-weight: 700;          /* Grassetto */
-  margin-bottom: 20px;       /* Spazio sotto */
-  padding-bottom: 20px;      /* Spazio interno sotto */
-  border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 85%); /* Linea divisoria */
-}
-
-.portfolio-details .portfolio-info ul {
-  list-style: none;          /* Rimuove pallini */
-  padding: 0;                /* Rimuove padding */
-  font-size: 15px;           /* Dimensione testo */
-}
-
-.portfolio-details .portfolio-info ul li+li {
-  margin-top: 10px;          /* Spazio tra gli elementi della lista */
-}
-
-.portfolio-details .portfolio-description {
-  padding-top: 30px;         /* Spazio sopra descrizione */
-}
-
-.portfolio-details .portfolio-description h2 {
-  font-size: 26px;           
-  font-weight: 700;          /* Grassetto */
-  margin-bottom: 20px;       /* Spazio sotto */
-}
-
-.portfolio-details .portfolio-description p {
-  padding: 0;                /* Nessun padding interno */
-  color: color-mix(in srgb, var(--default-color), transparent 30%); /* Testo con trasparenza */
+code{
+  color: var(--accent-color);
 }
